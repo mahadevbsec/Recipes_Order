@@ -1,0 +1,11 @@
+node_modules/
+client/node_modules/
+server/node_modules/
+client/build/
+dist/
+.env
+.env.local
+.vercel
+package-lock.json
+yarn.lock
+
