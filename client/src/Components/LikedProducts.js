@@ -8,7 +8,7 @@ const LikedProducts = () => {
 
   const fetchLikedProducts = useCallback(async () => {
     try {
-      const response = await fetch(buildUrl("/auth/likedRecipes"));
+      const response = await fetch(buildUrl("https://recipes-share.onrender.com/auth/likedRecipes"));
 
       if (!response.ok) {
         toast.error("Failed to fetch liked products");
@@ -35,7 +35,7 @@ const LikedProducts = () => {
         )
       ) {
         const response = await fetch(
-          buildUrl(`/auth/removeLiked/${recipeId}`),
+          buildUrl(`https://recipes-share.onrender.com/auth/removeLiked/${recipeId}`),
           {
             method: "DELETE",
           }
