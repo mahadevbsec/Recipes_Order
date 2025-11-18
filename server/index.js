@@ -14,6 +14,7 @@ const forgotPasswordRoutes = require('./routes/forgotPassword');
 const app = express();
 
 // === CORS Middleware ===
+
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim().replace(/\/$/, ''))
   : [
@@ -59,14 +60,17 @@ app.use((req, res, next) => {
 });
 
 // === Built-in Middleware ===
+
 app.use(express.json()); // Parse incoming JSON
 
 // === Test Route ===
+
 app.get('/', (req, res) => {
   res.json({ message: 'Recipe Sharing Backend Running' });
 });
 
 // === Connect to MongoDB ===
+
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/recipe-sharing';
 
 mongoose.connect(mongoURI, {
@@ -80,12 +84,14 @@ mongoose.connect(mongoURI, {
 });
 
 // === API Routes ===
+
 app.use('/auth', registerRoutes);
 app.use('/auth', loginRoutes);
 app.use('/auth', forgotPasswordRoutes);
 app.use('/auth', recipeRoutes);
 
 // === Start Server ===
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
