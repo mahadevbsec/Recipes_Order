@@ -65,7 +65,7 @@ const AuthPage = ({ initialMode = "login" }) => {
     }
 
     try {
-      let response = await fetch(buildUrl("https://recipes-share.onrender.com/auth/login"), {
+      let response = await fetch(buildUrl("/auth/login"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -100,7 +100,7 @@ const AuthPage = ({ initialMode = "login" }) => {
     }
 
     try {
-      const response = await fetch(buildUrl("https://recipes-share.onrender.com/auth/register"), {
+      const response = await fetch(buildUrl("/auth/register"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -140,7 +140,7 @@ const AuthPage = ({ initialMode = "login" }) => {
     }
 
     try {
-      const response = await fetch(buildUrl("https://recipes-share.onrender.com/auth/forgotpassword"), {
+      const response = await fetch(buildUrl("/auth/forgotpassword"), {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

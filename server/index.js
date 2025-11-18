@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+
 // Import routes
 const registerRoutes = require('./routes/RegisterRoute');
 const recipeRoutes = require('./routes/RecipeRoute');
@@ -14,24 +15,27 @@ const app = express();
 
 // === CORS Middleware ===
 const allowedOrigins = process.env.CORS_ORIGINS
-  ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim())
+  ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim().replace(/\/$/, ''))
   : [
+      'https://recipes-share-8.vercel.app',
+      'https://recipes-share-m.vercel.app',
       'https://recipes-share.onrender.com',
       'http://localhost:3000',
       'http://localhost:3001',
     ];
 
-app.use(cors({
+const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
     return callback(new Error(`Origin ${origin} not allowed by CORS`));
   },
-  credentials: true, // Allow cookies/authorization headers
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+};
+
+app.use(cors(corsOptions));
 
 // === Built-in Middleware ===
 app.use(express.json()); // Parse incoming JSON
@@ -40,7 +44,6 @@ app.use(express.json()); // Parse incoming JSON
 app.get('/', (req, res) => {
   res.json({ message: 'Recipe Sharing Backend Running' });
 });
-
 
 // === Connect to MongoDB ===
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/recipe-sharing';

@@ -14,7 +14,7 @@ const Recipes = () => {
 
   const fetchRecipes = useCallback(async () => {
     try {
-      const res = await fetch(buildUrl("https://recipes-share.onrender.com/auth/recipe"), {
+      const res = await fetch(buildUrl("/auth/recipe"), {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const Recipes = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this recipe?")) return;
     try {
-      const res = await fetch(buildUrl(`https://recipes-share.onrender.com/auth/recipe/${id}`), {
+      const res = await fetch(buildUrl(`/auth/recipe/${id}`), {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ const Recipes = () => {
 
   const handleAddFavorite = async (id) => {
     try {
-      const res = await fetch(buildUrl(`https://recipes-share.onrender.com/auth/likedRecipes/${id}`), {
+      const res = await fetch(buildUrl(`/auth/likedRecipes/${id}`), {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ const Recipes = () => {
       fetchRecipes();
     } else {
       try {
-        const res = await fetch(buildUrl(`https://recipes-share.onrender.com/auth/searchRecipes/${key}`), {
+        const res = await fetch(buildUrl(`/auth/searchRecipes/${key}`), {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

@@ -7,10 +7,20 @@ const getBaseUrl = () => {
     return "http://localhost:5000";
   }
 
-  return "https://racipe-sharing.onrender.com";
+  return "https://recipes-share.onrender.com";
 };
 
 export const API_BASE_URL = getBaseUrl();
 
-export const buildUrl = (path = "") => `${API_BASE_URL}${path}`;
+export const buildUrl = (path = "") => {
+  if (!path) {
+    return API_BASE_URL;
+  }
 
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${API_BASE_URL}${normalizedPath}`;
+};
