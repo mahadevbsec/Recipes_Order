@@ -7,7 +7,7 @@ const getBaseUrl = () => {
     return "http://localhost:5000";
   }
 
-  return "https://acchu-recipes.onrender.com";
+  return "https://recipes-order.onrender.com";
 };
 
 export const API_BASE_URL = getBaseUrl();
