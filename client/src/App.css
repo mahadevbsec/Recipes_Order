@@ -1211,57 +1211,107 @@ nav ul li a.active {
 /* Responsive Design */
 @media (max-width: 768px) {
   .SignupContainer {
-    margin: 100px auto 20px;
-    padding: 2rem;
+    margin: 20px auto 20px;
+    padding: 2.5rem;
+    width: 95%;
+    max-width: 400px;
+    min-height: auto;
   }
-  
+
+  .SignupContainer h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .SignupContainer form input {
+    padding: 1.2rem 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .SignupContainer form button {
+    padding: 1.2rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .login-layout {
+    margin-top: 20px;
+    padding: 1rem;
+    width: 100%;
+  }
+
   .recipe-list {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
   }
-  
-  .recipe-actions {
-    flex-direction: column;
-  }
-  
-  .hamburger-icon {
-    display: block;
-  }
-  
-  .nav-right {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-right.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  nav ul {
-    flex-direction: column;
+
+  .recipe-card {
     padding: 1rem;
   }
-  
-  nav ul li {
-    margin: 0.25rem 0;
+
+  .recipe-card h3 {
+    font-size: 1rem;
   }
-  
-  nav ul li a {
-    display: block;
+
+  .recipe-card p {
+    font-size: 0.8rem;
+  }
+
+  .recipe-card button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .search-bar input {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-btn {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .modal-overlay .order-modal {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-width: none;
+    width: calc(100% - 2rem);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+
+  .ordered-recipe-card {
+    padding: 1rem;
+  }
+
+  .ordered-recipes {
+    padding: 1rem;
+  }
+
+  .order-details {
+    margin: 1rem 0;
+  }
+
+  .order-info-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .payment-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .payment-method-badge,
+  .payment-status {
+    width: 100%;
     text-align: center;
-    padding: 1rem;
   }
 }
 
