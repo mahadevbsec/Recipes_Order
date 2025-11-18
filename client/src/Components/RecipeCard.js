@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RecipeCard = ({ recipe, onDelete, onAddFavorite }) => {
+const RecipeCard = ({ recipe, onDelete, onAddFavorite, onOrderRecipe }) => {
   return (
     <div className="recipe-card">
       <div className="recipe-image">
@@ -30,6 +30,12 @@ const RecipeCard = ({ recipe, onDelete, onAddFavorite }) => {
             className="favorite-btn"
           >
             Add to Favorites
+          </button>
+          <button 
+            onClick={() => onOrderRecipe(recipe._id)}
+            className="order-btn"
+          >
+            Order Recipe
           </button>
           <button 
             onClick={() => onDelete(recipe._id)}

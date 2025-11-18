@@ -17,25 +17,45 @@ const app = express();
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(',').map(origin => origin.trim().replace(/\/$/, ''))
   : [
-      'https://recipes-share-8.vercel.app',
-      'https://recipes-share-m.vercel.app',
-      'https://recipes-share.onrender.com',
+      'https://acchu-recipes.vercel.app',
+      'https://acchu-recipes.onrender.com',
       'http://localhost:3000',
       'http://localhost:3001',
     ];
 
 const corsOptions = {
   origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Log for debugging
+    console.log(`CORS blocked origin: ${origin}`);
     return callback(new Error(`Origin ${origin} not allowed by CORS`));
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 };
 
+// Apply CORS middleware
 app.use(cors(corsOptions));
+
+// ✅ Handle preflight requests safely
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    cors(corsOptions)(req, res, next);
+  } else {
+    next();
+  }
+});
 
 // === Built-in Middleware ===
 app.use(express.json()); // Parse incoming JSON

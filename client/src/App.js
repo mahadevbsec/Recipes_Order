@@ -18,7 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
+        
         {/* Private routes */}
         <Route element={<PrivateComponent />}>
           <Route path="/recipes" element={<Recipes />} />

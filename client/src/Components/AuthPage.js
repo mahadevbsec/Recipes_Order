@@ -116,10 +116,9 @@ const AuthPage = ({ initialMode = "login" }) => {
         if (user.error) {
           toast.warn("User already exists. Try with different email");
         } else {
-          toast.success("Registration successful.");
-          localStorage.setItem("token", user.token);
+          toast.success("Registration successful. Please login.");
           setTimeout(() => {
-            window.location.href = "/recipes";
+            setMode("login");
           }, 2000);
         }
       } else {
@@ -245,7 +244,7 @@ const AuthPage = ({ initialMode = "login" }) => {
             <h2>Login</h2>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Email"
               value={loginForm.email}
               onChange={(e) =>
                 setLoginForm((prev) => ({ ...prev, email: e.target.value }))
@@ -253,7 +252,7 @@ const AuthPage = ({ initialMode = "login" }) => {
             />
             <input
               type="password"
-              placeholder="Enter your password"
+              placeholder="Password"
               value={loginForm.password}
               onChange={(e) =>
                 setLoginForm((prev) => ({ ...prev, password: e.target.value }))
@@ -261,7 +260,7 @@ const AuthPage = ({ initialMode = "login" }) => {
             />
             <button type="submit">Sign in</button>
             <p className="form-helper-text">
-              Don&apos;t have an account?{" "}
+              Don't have an account?{" "}
               <span
                 className="inline-link"
                 onClick={() => setMode("register")}
@@ -274,6 +273,19 @@ const AuthPage = ({ initialMode = "login" }) => {
                 Sign up
               </span>
             </p>
+            <p className="form-helper-text">
+              <span
+                className="inline-link"
+                onClick={() => setMode("forgot")}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") setMode("forgot");
+                }}
+              >
+                Forgot Password?
+              </span>
+            </p>
           </form>
         );
     }
@@ -282,30 +294,7 @@ const AuthPage = ({ initialMode = "login" }) => {
   return (
     <div className="login-layout">
       <div className="SignupContainer form-panel">
-        <div className="auth-tab-list">
-          <button
-            className={mode === "login" ? "active" : ""}
-            type="button"
-            onClick={() => setMode("login")}
-          >
-            Login
-          </button>
-          <button
-            className={mode === "register" ? "active" : ""}
-            type="button"
-            onClick={() => setMode("register")}
-          >
-            Sign Up
-          </button>
-          <button
-            className={mode === "forgot" ? "active" : ""}
-            type="button"
-            onClick={() => setMode("forgot")}
-          >
-            Forgot Password
-          </button>
-        </div>
-
+        
         {renderActiveForm()}
         {showError && (
           <span className="fill-fields-error">Please fill all required fields</span>
@@ -315,17 +304,7 @@ const AuthPage = ({ initialMode = "login" }) => {
 
       <div className="carousel-panel">
         <div id="loginCarousel" className="carousel slide" aria-roledescription="carousel">
-          <ol className="carousel-indicators">
-            {carouselImages.map((_, index) => (
-              <li
-                key={index}
-                className={index === currentSlide ? "active" : ""}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </ol>
-
+          
           <div className="carousel-inner">
             {carouselImages.map((image, index) => (
               <div
@@ -342,23 +321,7 @@ const AuthPage = ({ initialMode = "login" }) => {
             ))}
           </div>
 
-          <button
-            className="carousel-control-prev"
-            type="button"
-            onClick={handlePrev}
-            aria-label="Previous"
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            onClick={handleNext}
-            aria-label="Next"
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          </button>
-        </div>
+                  </div>
       </div>
     </div>
   );
